@@ -35,7 +35,23 @@
 	<wp:base_site_url>%URL%</wp:base_site_url>
 	<wp:base_blog_url>%URL%</wp:base_blog_url>
 
-	<wp:author><wp:author_id>1</wp:author_id><wp:author_login>gumara</wp:author_login><wp:author_email>gumaraa@gmail.com</wp:author_email><wp:author_display_name><![CDATA[gumara]]></wp:author_display_name><wp:author_first_name><![CDATA[]]></wp:author_first_name><wp:author_last_name><![CDATA[]]></wp:author_last_name></wp:author>
+	<wp:author>
+		<wp:author_id>1</wp:author_id>
+		<wp:author_login>gumara</wp:author_login>
+		<wp:author_email>gumaraa@gmail.com</wp:author_email>
+		<wp:author_display_name><![CDATA[gumara]]></wp:author_display_name>
+		<wp:author_first_name><![CDATA[]]></wp:author_first_name>
+		<wp:author_last_name><![CDATA[]]></wp:author_last_name>
+	</wp:author>
+
+	<wp:author>
+		<wp:author_id>2</wp:author_id>
+		<wp:author_login>xavier</wp:author_login>
+		<wp:author_email>anoochit@gmail.com</wp:author_email>
+		<wp:author_display_name><![CDATA[xavier]]></wp:author_display_name>
+		<wp:author_first_name><![CDATA[]]></wp:author_first_name>
+		<wp:author_last_name><![CDATA[]]></wp:author_last_name>
+	</wp:author>
 
 	<wp:category><wp:term_id>1</wp:term_id><wp:category_nicename>uncategorized</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Uncategorized]]></wp:cat_name></wp:category>
 

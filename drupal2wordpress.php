@@ -42,7 +42,7 @@ mysql_select_db($db) or die(mysql_error());
 mysql_query("SET NAMES 'utf8'");
 
 // Tag query
-$sql_tag="SELECT * FROM ".$db_prefix."taxonomy_term_data limit 2";
+$sql_tag="SELECT * FROM ".$db_prefix."taxonomy_term_data";
 
 // Tags
 $result_tag = mysql_query($sql_tag) or die (mysql_error());
@@ -53,7 +53,7 @@ for ($i=0; $i< $numrows_tag; $i++) {
 	$tag_id= mysql_result($result_tag,$i,"tid");
 	$tag_name= mysql_result($result_tag,$i,"name");
 	$tag_str=str_replace("%TID%", $tag_id,$tmp_tag);
-	$tag_str=str_replace("%TAG%", $tag_name,$tag_str);	
+	$tag_str=str_replace("%TAG%", htmlspecialchars($tag_name),$tag_str);	
 	$wp_tag.=$tag_str."\n";
 }
 
@@ -101,6 +101,15 @@ for ($i_node = 0; $i_node < $numrows_node; $i_node++)
 
 
 $nid = mysql_result($result_node, $i_node, "nid");
+$uid = mysql_result($result_node, $i_node, "uid");
+
+if ($uid==4) {
+	$author_name="xavier";
+} else {
+	$author_name="gumara";
+}
+
+
 $title= mysql_result($result_node,$i_node,"title");
 $created= date("r", mysql_result($result_node,$i_node,"created"));
 $updated= date("r", mysql_result($result_node,$i_node,"changed"));
@@ -113,8 +122,8 @@ if ($type=="post") {
 
 	$item_str=str_replace("%NID%", $nid, $tmp_item);
 	$item_str=str_replace("%URL%", $blog_url, $item_str);
-	$item_str=str_replace("%TITLE%", $title, $item_str);
-	$item_str=str_replace("%AUTHOR%", $global_author_name, $item_str);
+	$item_str=str_replace("%TITLE%", $title, $item_str);	
+	$item_str=str_replace("%AUTHOR%", $author_name, $item_str);
 	$item_str=str_replace("%BODY%", $body_html, $item_str);
 	$item_str=str_replace("%POSTDATE%", $created, $item_str);
 	$item_str=str_replace("%PUBDATE%", $created, $item_str);
