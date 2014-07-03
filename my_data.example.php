@@ -1,7 +1,7 @@
 <?php
 // change these variables
 $user="root";
-$pass="monalisa";
+$pass="password";
 $db="drupal";
 $db_prefix="";
 // also change these variables, it should be your blogger info
