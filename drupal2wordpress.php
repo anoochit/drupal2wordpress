@@ -7,7 +7,7 @@ use \Michelf\Markdown;
 
 // We'll be outputting a xml
 header('Content-type: text/xml');
-//header('Content-Disposition: attachment; filename="drupal2wordpress_export.xml"');
+header('Content-Disposition: attachment; filename="drupal2wordpress_export.xml"');
 
 $wp_post="";
 $wp_tag="";
