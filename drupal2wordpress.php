@@ -57,7 +57,7 @@ for ($i=0; $i< $numrows_tag; $i++) {
 	$wp_tag.=$tag_str."\n";
 }
 
-// Echo Combine
+// Echo combine header, tags, generator
 echo $wp_header;
 echo $wp_tag;
 echo $wp_generator;
@@ -65,7 +65,7 @@ echo $wp_generator;
 // Node query
 //$sql = "SELECT * FROM ".$db_prefix."node as n JOIN ".$db_prefix."field_data_body as fdb ON n.nid=fdb.entity_id";
 $sql_node = "SELECT * FROM ".$db_prefix."node as n JOIN ".$db_prefix."field_data_body as fdb ON n.nid=fdb.entity_id 
-				ORDER by nid DESC LIMIT 2";
+				ORDER by nid DESC LIMIT 500";
 
 // Nodes
 $result_node = mysql_query($sql_node) or die (mysql_error());
@@ -145,15 +145,16 @@ if ($type=="post") {
 
 	$item_str=str_replace("%ITEMTAG%", $wp_itemtag_str, $item_str);
 
-	$wp_post.=$item_str;
+	$wp_post.=$item_str."\n";
 
 }
 
 
-
+// Echo post item
 echo $wp_post;
 
 
 }
 
+// Echo footer
 echo $wp_footer;
