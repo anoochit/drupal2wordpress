@@ -37,7 +37,7 @@ $tmp_item_tag=file_get_contents("item-tag.xml");
 $wp_footer=file_get_contents("footer.xml");
 
 // Connect 
-mysql_connect("127.0.0.1", $user, $pass) or die(mysql_error());
+mysql_connect($host, $user, $pass) or die(mysql_error());
 mysql_select_db($db) or die(mysql_error());
 mysql_query("SET NAMES 'utf8'");
 
