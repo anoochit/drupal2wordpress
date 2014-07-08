@@ -9,7 +9,6 @@ use \Michelf\Markdown;
 header('Content-type: text/xml');
 header('Content-Disposition: attachment; filename="drupal2wordpress_export.xml"');
 
-$wp_post="";
 $wp_tag="";
 $wp_category="";
 
@@ -65,15 +64,14 @@ echo $wp_generator;
 // Node query
 //$sql = "SELECT * FROM ".$db_prefix."node as n JOIN ".$db_prefix."field_data_body as fdb ON n.nid=fdb.entity_id";
 $sql_node = "SELECT * FROM ".$db_prefix."node as n JOIN ".$db_prefix."field_data_body as fdb ON n.nid=fdb.entity_id 
-				ORDER by nid DESC LIMIT 500";
+				ORDER by nid DESC";
 
 // Nodes
 $result_node = mysql_query($sql_node) or die (mysql_error());
 $numrows_node = mysql_numrows($result_node);
 
 // Loop over the nodes.
-for ($i_node = 0; $i_node < $numrows_node; $i_node++)
-{
+for ($i_node = 0; $i_node < $numrows_node; $i_node++) {
 
 	$type= htmlspecialchars(mysql_result($result_node,$i_node,"bundle"));
 
@@ -110,14 +108,14 @@ if ($uid==4) {
 }
 
 
-$title= mysql_result($result_node,$i_node,"title");
+$title= htmlspecialchars(mysql_result($result_node,$i_node,"title"));
 $created= date("r", mysql_result($result_node,$i_node,"created"));
-$updated= date("r", mysql_result($result_node,$i_node,"changed"));
+$updated= date("Y-m-d H:i:s", mysql_result($result_node,$i_node,"changed"));
 
 $body_md = mysql_result($result_node,$i_node,"body_value");
 $body_html = Markdown::defaultTransform($body_md);
 
-// WP Post
+// WP Post check if post type
 if ($type=="post") {
 
 	$item_str=str_replace("%NID%", $nid, $tmp_item);
@@ -125,7 +123,7 @@ if ($type=="post") {
 	$item_str=str_replace("%TITLE%", $title, $item_str);	
 	$item_str=str_replace("%AUTHOR%", $author_name, $item_str);
 	$item_str=str_replace("%BODY%", $body_html, $item_str);
-	$item_str=str_replace("%POSTDATE%", $created, $item_str);
+	$item_str=str_replace("%POSTDATE%", $updated, $item_str);
 	$item_str=str_replace("%PUBDATE%", $created, $item_str);
 
 	// Item Tag
@@ -143,18 +141,15 @@ if ($type=="post") {
 		$wp_itemtag_str.=$itemtag_str."\n";
 	}
 
+	// replace node's tag
 	$item_str=str_replace("%ITEMTAG%", $wp_itemtag_str, $item_str);
 
-	$wp_post.=$item_str."\n";
+	echo $item_str;
 
-}
-
-
-// Echo post item
-echo $wp_post;
+} // post 
 
 
-}
+} // end loop node
 
 // Echo footer
 echo $wp_footer;
